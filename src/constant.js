@@ -53,3 +53,5 @@ export const SET_FIRST_NAME = "SET FIRST NAME";
 export const SET_LAST_NAME = "SET LAST NAME";
 export const SET_NAME = "SET NAME";
 export const SET_MESSAGE = "SET MESSAGE";
+// adding the one for profile picture
+export const SET_PROFILE_PIC = "SET PROFILE PICTURE";
