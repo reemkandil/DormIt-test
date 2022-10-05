@@ -19,6 +19,8 @@ import {
   UPDATE_CURRENT_ORDER,
   GET_PAST_ORDERS,
   SET_MESSAGE,
+  // Adding one for the profile picture
+  SET_PROFILE_PIC,
 } from "../../constant";
 
 export const UserContext = createContext({
@@ -337,6 +339,22 @@ function userReducer(state, action) {
       }
     }
 
+        /**
+     * ----------------------------------------------------------------------------------------
+     */
+
+         case SET_PROFILE_PIC: {
+          // action is {type: SET_PROFILE_PIC, payload: {pic: string}}
+          const pic = action.payload.pic;
+          if (pic === undefined) {
+            throw new Error("You are missing the picture field");
+          } else {
+            return {
+              ...state,
+              pic: pic,
+            };
+          }
+        }
     /**
      * ----------------------------------------------------------------------------------------
      */
