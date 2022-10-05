@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { AppContext } from "../app-context";
 import { UserContext } from "./user-context";
 
-import { SET_NAME, SET_MESSAGE, SET_CHECKOUT_ADDRESS } from "../../constant.js";
+// added SET_PROFILE_PIC
+import { SET_NAME, SET_MESSAGE, SET_CHECKOUT_ADDRESS, SET_PROFILE_PIC } from "../../constant.js";
 
 import { doc, setDoc } from "firebase/firestore";
 
@@ -38,6 +39,46 @@ export function useUpdateName() {
       };
     } catch (error) {
       console.log("useUpdateName() error: ", error);
+      return {
+        isSuccess: false,
+        message: "Something went wrong. Please try again",
+      };
+    }
+  };
+}
+
+/**
+ * return a function that when called will update user profile pic
+ */
+ export function useUpdatePic() {
+  const { dispatch } = useContext(UserContext);
+
+  /**
+   * update user's profile pic when called
+   *
+   * in firebase, in "users" collection, each user has field named "profile_img"
+   * update this field
+   * then update user's field in Context by calling dispatch({type: SET_PROFILE_PIC, payload: {name: "your name"}})
+   */
+
+  const { db } = useContext(AppContext);
+
+  return async (pic) => {
+    try {
+      await setDoc(doc(db, "users", "pic"), {
+        pic: pic,
+      });
+      dispatch({
+        type: SET_PROFILE_PIC,
+        payload: { pic: pic },
+      });
+
+      return {
+        isSuccess: true,
+        message: "Your profile picture has been successfully updated",
+      };
+    } catch (error) {
+      console.log("useUpdatePic() error: ", error);
       return {
         isSuccess: false,
         message: "Something went wrong. Please try again",
