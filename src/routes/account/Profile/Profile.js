@@ -21,7 +21,25 @@ export default function Profile() {
           sx={{ pt: "13px", pb: "31px" }}
         >
           <Grid item xs={1.6} minWidth={75}>
-            <img src={profilePicture} id={styles.pfp} alt="profile"></img>
+          <Typography
+              variant="subtitle1"
+              fontSize={{ xs: "13px", sm: "15px" }}
+            >
+              Profile Picture
+            </Typography>
+            <img src={profilePicture} id={styles.pfp} alt="profile" onClick={useUpdatePic()}></img>
+            <TextField
+              value={user.profile_img}
+              size="small"
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "5px",
+                fieldset: { borderColor: "#fff" },
+                mt: "4px",
+              }}
+              InputProps={{ sx: { fontSize: "13px" } }}
+            />
+
           </Grid>
           <Grid item lg={3} md={3.5} xs={4} minWidth={125}>
             <Typography
